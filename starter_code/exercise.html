@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      JS Syntax Basics - Soccer Field Exercise
+    </title>
+  </head>
+  <body>
+    <img id="base" style=
+    "z-index: 1; position:absolute; left:0px; top:0px;" src=
+    "field.png"> <img id="ball" style=
+    "z-index: 2; position:absolute; left:0px; top:0px;" src=
+    "ball.png" onclick="moveBall()"> 
+    <script src="exercise.js">
+    </script> 
+    <script type="text/javascript">
+                var isScore = false;
+                var audio = document.createElement("audio");
+                var score = document.createElement("img");
+                score.setAttribute('src', 'goal.png');
+                score.setAttribute('style', 'z-index: 3;' +
+                                                   'position:absolute;' +
+                                                   'left:254px;' +
+                                                   'top:200px;');
+
+                function moveBall() {
+                        // play audio kick
+                        playAudio('kick.wav');
+
+                        // get coordinates and move ball
+                        ball = document.getElementById("ball");
+                        x = Math.floor(Math.random() * 775);
+                        y = Math.floor(Math.random() * 470);
+
+                        // shift image of ball by half width (= half height) in negative
+                        // coordinate directions for a more intuitive representation
+                        var halfImgWidth = ball.clientWidth / 2;
+                        ball.style.left  = x - halfImgWidth + "px";
+                        ball.style.top   = y - halfImgWidth + "px";
+
+                        // reset flag and check for goal
+                        if (isScore) {
+                                document.body.removeChild(score);
+                                isScore = false;
+                        }
+                        if (exercise.goalCheck(x, y)) {
+                                // display goal image
+                                displayScore();
+
+                                // play audio cheer
+                                playAudio('cheer.wav');
+                        }
+                }
+
+                function displayScore() {
+                        // display goal image
+                        document.body.appendChild(score);
+                        console.log('SCORE!');
+
+                        // set flag
+                        isScore = true;
+                }
+
+                function playAudio(filename){
+                        // play audio cheer
+            if ((audio !== null) && (audio.canPlayType) && (audio.canPlayType("audio/wav")) {
+                                audio.src = filename;
+                                audio.play();
+                        }
+                }
+    </script>
+  </body>
+</html>
